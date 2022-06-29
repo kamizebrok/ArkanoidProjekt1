@@ -5,13 +5,13 @@ Ball::Ball(float t_X, float t_Y)
 	circle.setPosition(t_X, t_Y);
 	circle.setRadius(this->ballRadius);
 	circle.setFillColor(Color::Blue);
-	circle.setOrigin(this->ballRadius, this->ballRadius);
-
+	circle.setOrigin(this->ballRadius, this->ballRadius); // przesuwamy punkt wzglêdem którego bêdziemy odnosiæ siê do pi³eczki aby by³ w œrodku
+	// dwukrotnie o promieñ
 }
 
-void Ball::draw(RenderTarget& target, RenderStates state) const		// nie bêdzie zmieniaæ pól naszej klasy
+void Ball::draw(RenderTarget& target, RenderStates state) const		// nie bêdzie zmieniaæ pól klasy
 {
-	target.draw(this->circle, state);
+	target.draw(this->circle, state);		// rysowanie obiektu draw(kszta³t, parametr state(?))
 }
 
 void Ball::update()

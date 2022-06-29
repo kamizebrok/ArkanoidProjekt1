@@ -7,7 +7,7 @@ Omnie::Omnie(float w, float h)
 	}
 	slowa[0].setFont(font);
 	slowa[0].setFillColor(Color::White);
-	slowa[0].setString("Nazywam sie Kamil Zebrok i studiuje Informatyke na Politechnice Slaskiej.");
+	slowa[0].setString("Nazywam sie Kamil Zebrok i studiuje Informatyke na semestrze 2 na Wydziale Matematyki Stosowanej, Politechniki Slaskiej.");
 	slowa[0].setCharacterSize(15);
 	slowa[0].setPosition(50, 50);
 
@@ -19,13 +19,13 @@ Omnie::Omnie(float w, float h)
 
 	slowa[2].setFont(font);
 	slowa[2].setFillColor(Color::White);
-	slowa[2].setString("Przedmiot ten jest prowadzony przez dr inz. Rafala Brocka.");
+	slowa[2].setString("Przedmiot ten jest prowadzony przez dr inz. Marcina Sobote.");
 	slowa[2].setCharacterSize(15);
 	slowa[2].setPosition(50, 150);
 
 	slowa[3].setFont(font);
 	slowa[3].setFillColor(Color::White);
-	slowa[3].setString("Gra powstala w lutym 2022.");
+	slowa[3].setString("Gra powstala w maju 2022.");
 	slowa[3].setCharacterSize(15);
 	slowa[3].setPosition(50, 300);
 }

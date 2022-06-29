@@ -10,7 +10,7 @@ using namespace sf;
 using namespace std;
 
 
-template <class T1, class T2> bool isIntersecting(T1 &A, T2 &B)		// tworzenie klasy szablonowej, zwraca boola
+template <class T1, class T2> bool isIntersecting(T1 &A, T2 &B)		// tworzenie szablonu dla klas, zwraca boola
 {
 	return A.right() >= B.left() && A.left() <= B.right()
 		&& A.bottom() >= B.top() && A.top() <= B.bottom();	// prawa krawêdŸ jest dalej od lewej etc.. -> sprawdzamy kolizjê
@@ -18,7 +18,7 @@ template <class T1, class T2> bool isIntersecting(T1 &A, T2 &B)		// tworzenie kl
 
 bool czyKolizja(Paletka& paletka, Ball& ball)
 {
-	if (!isIntersecting(paletka, ball)) {	// isIntersectinf -> sprawdzamy czy nie zachodzi kolizja
+	if (!isIntersecting(paletka, ball)) {	// isIntersecting -> sprawdzamy czy NIE zachodzi kolizja
 		return false;
 	}
 	ball.moveUp();
@@ -32,7 +32,8 @@ bool czyKolizja(Paletka& paletka, Ball& ball)
 }
 
 bool czyKolizja(Bloczek& bloczek, Ball& ball) {
-	if (!isIntersecting(bloczek, ball)) return false;
+	if (!isIntersecting(bloczek, ball)) 
+		return false;
 
 	bloczek.niszcz();
 
@@ -62,8 +63,9 @@ void vel(Ball& ball, int x)
 
 int main()
 {
-	//MENU TEST
+	//MENU TEST  
 	Ball ball(400, 300);	// tworzenie klasy pi³eczki na œrodku ekranu
+	Ball ball1(500, 200);
 	RenderWindow MENU{ VideoMode{960,720}, "Arcanoid Menu", Style::Default };
 	Menu mainMenu(MENU.getSize().x, MENU.getSize().y);
 	while (MENU.isOpen()) {
@@ -94,9 +96,9 @@ int main()
 					}
 					if (x == 1)
 					{
-						Opcje tuOpcje(Options.getSize().x, Options.getSize().y);	//obiekt klasy opcje
+						Opcje ObOpcje(Options.getSize().x, Options.getSize().y);	//obiekt klasy opcje
 						while (Options.isOpen()) {
-							Event event1;
+							Event event1;							// kolejny event
 							while (Options.pollEvent(event1)) {
 								if (event1.type == Event::Closed) {
 									Options.close();
@@ -104,15 +106,15 @@ int main()
 
 								if (event1.type == Event::KeyReleased) {
 									if (event1.key.code == Keyboard::Right) {
-										tuOpcje.MoveRight();
+										ObOpcje.MoveRight();
 										break;
 									}
 									if (event1.key.code == Keyboard::Left) {
-										tuOpcje.MoveLeft();
+										ObOpcje.MoveLeft();
 										break;
 									}
 									if (event0.key.code == Keyboard::Return) {
-										int t = tuOpcje.OpcjeKlik();
+										int t = ObOpcje.OpcjeKlik();
 										if (t == 0) {
 											cout << "Wybrano poziom Easy ";
 											vel(ball, t);
@@ -131,7 +133,7 @@ int main()
 									}
 								}
 								Options.clear();
-								tuOpcje.draw(Options);
+								ObOpcje.draw(Options);
 								About.close();
 								Options.display();
 							}
@@ -139,7 +141,7 @@ int main()
 					}
 					if (x == 2)
 					{
-						Omnie tuOmnie(About.getSize().x, About.getSize().y);	// obiekt klasy Omnie
+						Omnie ObOmnie(About.getSize().x, About.getSize().y);	// obiekt klasy Omnie
 						while (About.isOpen()) {
 							Event event1;
 							while (About.pollEvent(event1)) {
@@ -152,7 +154,7 @@ int main()
 									}
 								}
 								About.clear();
-								tuOmnie.draw(About);
+								ObOmnie.draw(About);
 								Options.close();
 								About.display();
 							}
@@ -203,18 +205,17 @@ int main()
 		paletka.update();
 		czyKolizja(paletka, ball);
 
-		for (auto& bloczek : bloczki)
+		for (auto& bloczek : bloczki)		// autoloop, takie "dla ka¿dego" automatycznie
 			if (czyKolizja(bloczek, ball)) 
-				break;
+				break;		// bo kolizja nastêpuje tylko raz
 
 		auto i = remove_if(begin(bloczki), end(bloczki), [](Bloczek& bloczek) { return bloczek.czyZniszczony(); });
-		bloczki.erase(i, end(bloczki));
-
+		bloczki.erase(i, end(bloczki));		// usuwamy z kontenera
 
 		window.draw(ball);
 		window.draw(paletka);
 
-		for (auto& bloczek : bloczki)	// autoloop, takie "dla ka¿dego" automatycznie
+		for (auto& bloczek : bloczki)	
 			window.draw(bloczek);
 
 		window.display();					// wyœwietlamy obiekty metod¹ display

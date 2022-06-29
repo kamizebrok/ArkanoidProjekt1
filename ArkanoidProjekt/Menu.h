@@ -7,7 +7,7 @@ using namespace sf;
 #define maxmain 4
 class Menu
 {
-public:		//dostêp z poza klasy
+public:		
 	Menu(float w, float h);
 
 	void draw(RenderWindow& window);
@@ -19,7 +19,7 @@ public:		//dostêp z poza klasy
 	}
 	~Menu();
 
-private:	// dostep jedynie wewnatrz
+private:
 	int MenuWybrane;
 	Font font;
 	Text mainMenu[maxmain];
